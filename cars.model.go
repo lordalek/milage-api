@@ -1,6 +1,10 @@
 package main
 
+import (
+	"github.com/google/uuid"
+)
+
 type Car struct {
-	ID   [16]byte
+	ID   uuid.UUID
 	Name string
 }

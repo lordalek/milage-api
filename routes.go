@@ -24,4 +24,10 @@ var routes = Routes{
 		"/cars",
 		CarsIndex,
 	},
+	Route{
+		"CarsGet",
+		"GET",
+		"/cars/{id}",
+		CarsGet,
+	},
 }

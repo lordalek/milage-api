@@ -3,15 +3,21 @@ package main
 import (
 	"errors"
 
-	"github.com/nu7hatch/gouuid"
+	"github.com/google/uuid"
 )
 
 var cars []Car
 
 func init() {
-	id, _ := uuid.NewV4()
 
-	CreateCar(Car{Name: "Toyota Carina", ID: *id})
+	id, err := uuid.Parse("b9ec3ec6-18e2-11e8-9619-1867b03edad8")
+
+	if err != nil {
+		panic(err)
+	}
+
+	CreateCar(Car{Name: "Toyota Carina", ID: id})
+
 }
 
 func CreateCar(car Car) {
@@ -22,9 +28,10 @@ func GetCars() []Car {
 	return cars
 }
 
-func GetCar(ID [16]byte) (Car, error) {
+func GetCar(ID string) (Car, error) {
+	parsedID, _ := uuid.Parse(ID)
 	for _, car := range cars {
-		if car.ID == ID {
+		if car.ID == parsedID {
 			return car, nil
 		}
 	}
